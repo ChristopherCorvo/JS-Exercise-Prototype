@@ -45,7 +45,7 @@ function Person(name, age) {
   this.stomach = [],
   this.eat = function (someFood){
     if(this.stomach.length > 10){
-      this.stomach.push(someFood);
+      this.stomach.push(someFood)
     } 
   }
   this.poop = function(){
