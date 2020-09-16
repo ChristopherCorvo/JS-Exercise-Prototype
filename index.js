@@ -45,12 +45,12 @@ function Person(name, age) {
   this.stomach = [],
   this.eat = function (someFood){
     if(this.stomach.length > 10){
-      this.stomach.push(someFood)
+      this.stomach.push(someFood);
     } 
-  }
+  },
   this.poop = function(){
     return this.stomach = [];
-  }
+  },
   this.toString = function(){
     return `${this.name}, ${this.age}`;
   }
@@ -58,20 +58,36 @@ function Person(name, age) {
 
 /*
   TASK 2
-    - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
-    - All instances built with Car:
-        + should initialize with an `tank` at 0
-        + should initialize with an `odometer` at 0
-    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
-    - STRETCH: Give cars ability to `.drive(distance)`. The distance driven:
-        + Should cause the `odometer` to go up.
-        + Should cause the the `tank` to go down taking `milesPerGallon` into account.
+    - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments. **DONE**
+    - All instances built with Car: **DONE**
+        + should initialize with an `tank` at 0 **DONE**
+        + should initialize with an `odometer` at 0 **DONE**
+    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`. **DONE**
+    - STRETCH: Give cars ability to `.drive(distance)`. The distance driven: **DONE**
+        + Should cause the `odometer` to go up. **DONE**
+        + Should cause the the `tank` to go down taking `milesPerGallon` into account.**DONE**
     - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesPerGallon) {
+  this.model = model,
+  this.milesPerGallon = milesPerGallon,
+  this.tank = 0,
+  this.odometer = 0,
+  this.fill = function(gallons){
+    return this.tank = this.tank + gallons;
+  },
+  this.drive = function (distance){
+    this.odometer = this.odometer + distance;
+    this.tank = this.tank - (distance/this.milesPerGallon);
 
+    if(this.tank <= 0){
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }
+
+      return;
+  }
 }
 
 /*
@@ -81,9 +97,13 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);  // subclass is pointing to the superclass
+  this.favoriteToy = favoriteToy
+};
 
-}
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function (favoriteToy) {return `Playing with ${this.favoriteToy}`};
 
 /* 
   TASK 4
