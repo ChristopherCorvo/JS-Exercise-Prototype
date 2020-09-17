@@ -78,21 +78,21 @@ function Car(model, milesPerGallon) {
   this.model = model,
   this.milesPerGallon = milesPerGallon,
   this.tank = 0, 
-  this.odometer = 0,
-  
-  this.drive = function (distance){ 
-    this.odometer = this.odometer + distance;
-    this.tank = Math.round(this.tank - (distance/this.milesPerGallon));
-    
+  this.odometer = 0
+};
+
+Car.prototype.fill = function(gallons){   // this will get added to Car prototype
+  this.tank = this.tank + gallons;
+};
+
+Car.prototype.drive = function(distance) {
+    this.odometer = this.odometer + distance; // should make odometer increase by distance in miles
+    this.tank = this.tank - Math.round(distance/this.milesPerGallon);
+   
     if(this.tank <= 0){
       return `I ran out of fuel at ${this.odometer} miles!`
     }
       return;
-  }
-}
-
-Car.prototype.fill = function(gallons){ 
-  return this.tank = this.tank + gallons;
 };
 
 
@@ -117,9 +117,20 @@ Baby.prototype.play = function (favoriteToy) {return `Playing with ${this.favori
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
+  
+  Answer: the 'this' keyword can point to different things depending on the circumstance. in essence there are 
+  4 scenarios governing the 'this' command.
+
+  1. Window Binding - if you use 'this' in a function attached to the global scope then 'this' will be pointing towards the window
+  object. This is usally not something you would intentionally want to do. 
+
+  2. implicit Binding - occurs when you are employing dot notation to invoke a function. So the general rule would be
+  to look to the left of the dot, that will become the context for 'this'. 
+  
+  3. explicit Binding -  occurs when you employ call() apply() or bind() each of these methods has different properties.
+  call() and apply() will both immediately invoke the function. You pass in 'this' bind() we pass in the arguements 
+  one by one and the function is not immedietly invoked. bind() also returns a new function that can be assigned to 
+  a variable and can be invoked later. 
   4. 
 */
 
