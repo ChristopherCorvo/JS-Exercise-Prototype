@@ -131,7 +131,8 @@ Baby.prototype.play = function (favoriteToy) {return `Playing with ${this.favori
   call() and apply() will both immediately invoke the function. You pass in 'this' bind() we pass in the arguements 
   one by one and the function is not immedietly invoked. bind() also returns a new function that can be assigned to 
   a variable and can be invoked later. 
-  4. 
+  
+  4. New Binding - 
 */
 
 
